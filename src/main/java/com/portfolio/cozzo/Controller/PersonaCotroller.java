@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "https://frontendcozzo.web.app") //le aviso que me acepte las peticiones desde esa dirección o puerto
+@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "https://frontendcozzo.web.app") //le aviso que me acepte las peticiones desde esa dirección o puerto
 public class PersonaCotroller {
     @Autowired IPersonaService iPersonaService;
     
