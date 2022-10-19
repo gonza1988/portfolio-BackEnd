@@ -78,8 +78,8 @@ public class PersonaCotroller {
     }*/
     
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody dtoPersona dtopersona){
+    //@PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoPersona dtopersona){
         if(!personaService.existsById(id)){
             
             return new ResponseEntity(new Mensaje("No existe el id"), HttpStatus.NOT_FOUND);
