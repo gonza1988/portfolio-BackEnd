@@ -32,8 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-//@CrossOrigin(origins = "http://localhost:4200")
-@CrossOrigin(origins = "https://frontendcozzo.web.app")
+@CrossOrigin(origins = {"https://frontendcozzo.web.app","http://localhost:4200"}) //de esta manera indico las 2 rutas en una sola línea, que tienen autorización a acceder desde el front
 public class AuthController {
     @Autowired
     PasswordEncoder passwordEncoder;
