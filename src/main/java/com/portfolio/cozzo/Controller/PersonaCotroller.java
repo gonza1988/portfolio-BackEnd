@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,9 +59,9 @@ public class PersonaCotroller {
         return new ResponseEntity(new Mensaje("Eduacion eliminada"),HttpStatus.OK);
     }*/
     
-    /*@PostMapping("/create")
+    @PostMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> create(@RequestBody dtoPersona dtoeducacion){
+    public ResponseEntity<?> create(@RequestBody dtoPersona dtoeducacion, @RequestBody dtoPersona dtopersona){
         if(StringUtils.isBlank(dtoeducacion.getNombre())){
             
             return new ResponseEntity(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
@@ -71,14 +72,19 @@ public class PersonaCotroller {
             return new ResponseEntity(new Mensaje("Ese nombre ya existe"), HttpStatus.BAD_REQUEST);
         }
         
-        Persona persona = new Persona(dtoeducacion.getNombre(), dtoeducacion.getDescripcion());
+        Persona persona = new Persona();
+        
+        persona.setNombre(dtopersona.getNombre());
+        persona.setApellido(dtopersona.getApellido());
+        persona.setDescripcion(dtopersona.getDescripcion());
+        persona.setImg(dtopersona.getImg());
         personaService.save(persona);
         
-        return new ResponseEntity(new Mensaje("Educacion creada correctamente"), HttpStatus.OK);
-    }*/
+        return new ResponseEntity(new Mensaje("Persona creada correctamente"), HttpStatus.OK);
+    }
     
     @PutMapping("/update/{id}")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoPersona dtopersona){
         if(!personaService.existsById(id)){
             
